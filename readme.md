@@ -5,3 +5,5 @@ go run .
 //creating a bin exec
 go build
 ./go-app-01
+
+https://www.youtube.com/watch?v=jFfo23yIWac&t=4652s

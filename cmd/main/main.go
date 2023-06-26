@@ -4,14 +4,16 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/gorilla/mux"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/shasikaud/go-app-01/pkg/routes"
 )
 
 func main() {
 	fmt.Println("hello")
-	filerServer := http.FileServer(http.Dir("./static"))
-	http.Handle("/", filerServer)
-	fmt.Printf("starting server at port 8080\n")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
-	}
+	r := mux.NewRouter()
+	routes.RegisterBookStoreRoutes(r)
+	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe("localHost:9010", r))
 }
